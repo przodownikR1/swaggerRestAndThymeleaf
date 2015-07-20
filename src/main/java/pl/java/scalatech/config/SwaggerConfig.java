@@ -26,8 +26,8 @@ public class SwaggerConfig {
     }
 
     private static ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo("Ocr Microsevice", "PoC", "API terms of service", "riscosoftware", "Apache2 API Licence Type",
-                "riscoSoftware API License");
+        ApiInfo apiInfo = new ApiInfo("rest + thymeleaf", "PoC rest+thymeleaf", "API terms of service", "przodownikR1@gmail.com", "MIT API Licence Type",
+                "przodownikR1 API License");
         return apiInfo;
     }
 }
