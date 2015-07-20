@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property scope="context" name="pattern_stdout"
+		value="%highlight(%.-5level)|%green(%date{yyyy-MM-dd HH:mm:ss.SSS})|%boldMagenta([%thread])|%yellow(%logger{70}:%boldYellow(%line)) - %msg%n%red(%rEx)" />
+	<property scope="context" name="pattern_log" value="%-4relative [%thread] %-5level %logger{35} - %msg %n"/>
+	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+	<timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+	
+		<resetJUL>true</resetJUL>
+	</contextListener>
+	
+	<consolePlugin />
+	<jmxConfigurator />
+	<withJansi>false</withJansi>
+	
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<charset>utf-8</charset>
+			<pattern>${pattern_stdout}</pattern>
+			<pattern></pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>bootRestWeb-${bySecond}.log</file>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>bootRestWeb.%d{yyyyMMdd}.log
+            </fileNamePattern>
+        </rollingPolicy>
+		<append>false</append>
+		<encoder>
+            <pattern>${pattern_log}</pattern>
+        </encoder>		
+	</appender>
+	
+     <appender name="ASYNC_500_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>500</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="FILE" />
+      </appender>
+
+	<logger name="pl.java.scalatech" level="info" />
+	<logger name="org.springframework" level="info" />
+
+
+    <root>
+     <level value="OFF" />
+     <appender-ref ref="console" />
+     <appender-ref ref="FILE" />
+   </root>
+   
+   
+</configuration>
