@@ -41,7 +41,8 @@ dependencies {
     compile("com.mangofactory:swagger-springmvc:1.0.2")
     compile("org.projectlombok:lombok:1.16.4")
     compile("com.google.guava:guava:18.0")
-    //compile("org.apache.tomcat.embed:tomcat-embed-jasper")
+    compile("org.apache.tomcat.embed:tomcat-embed-jasper")
+   // compile 'javax.servlet:jstl:1.1.1'
     compile("org.webjars:jquery:2.1.1")
     compile("org.webjars:bootstrap:3.2.0")
     compile 'ro.isdc.wro4j:wro4j-core:1.7.0'
