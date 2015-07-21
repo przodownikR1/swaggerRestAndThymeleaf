@@ -3,6 +3,7 @@ package pl.java.scalatech.web.rest;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
@@ -27,8 +28,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiResponses;
 import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
+
 @Api(value = "Test controller", description = "API test ")
 @RequestMapping("/api/person")
 @RestController
@@ -40,16 +42,14 @@ public class HelloRestController {
     @PostConstruct
     public void init() {
         maps.put(1l, new Person(1l, "przodownik", new BigDecimal(12)));
-        maps.put(2l,  new Person(2l, "przodownik2", new BigDecimal(23)));
+        maps.put(2l, new Person(2l, "przodownik2", new BigDecimal(23)));
         maps.put(3l, new Person(3l, "poka", new BigDecimal(6)));
         maps.put(4l, new Person(4l, "bak", new BigDecimal(13)));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ApiOperation(value = "find person", httpMethod = "GET",consumes = "application/json,application/xml",produces = "application/json,application/xml")
-    @ApiResponses(value = {
-            @ApiResponse(code = 400, message = "Invalid Request"),
-            @ApiResponse(code = 404, message = "Request not found") })
+    @ApiOperation(value = "find person", httpMethod = "GET", consumes = "application/json,application/xml", produces = "application/json,application/xml")
+    @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid Request"), @ApiResponse(code = 404, message = "Request not found") })
     public ResponseEntity<?> getPerson(@PathVariable Long id) {
         Person person = maps.get(id);
         if (person == null) { return ResponseEntity.notFound().build(); }
@@ -60,6 +60,8 @@ public class HelloRestController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ApiOperation(value = "find all person", httpMethod = "GET")
     public ResponseEntity<List<Person>> getPersons() {
+        List<Person> result = maps.entrySet().stream().parallel().map(Map.Entry::getValue).collect(Collectors.toList());
+        log.info("+++ java8 map.value to list {}", result);
         return ResponseEntity.ok(Lists.newArrayList(maps.values()));
     }
 
@@ -74,7 +76,7 @@ public class HelloRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    @ApiOperation(value = "update person", httpMethod = "PUT",consumes = "application/json,application/xml", produces = "application/json,application/xml")
+    @ApiOperation(value = "update person", httpMethod = "PUT", consumes = "application/json,application/xml", produces = "application/json,application/xml")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Long id, @RequestBody Person person) {
         person.setId(id);
@@ -84,9 +86,7 @@ public class HelloRestController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "delete person", httpMethod = "DELETE")
-    @ApiResponses(value = {
-            @ApiResponse(code = 400, message = "Invalid Request"),
-            @ApiResponse(code = 404, message = "Request not found") })
+    @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid Request"), @ApiResponse(code = 404, message = "Request not found") })
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         Person deleted = maps.remove(id);
         log.info("delete person {}", deleted);
