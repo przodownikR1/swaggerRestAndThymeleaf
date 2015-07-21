@@ -31,13 +31,14 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-logging")
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-logging"
+    compile "org.springframework.boot:spring-boot-starter-security"
     compile 'org.ajar:swagger-spring-mvc-ui:0.4'
-    compile("com.mangofactory:swagger-springmvc:1.0.2")
-    compile("org.projectlombok:lombok:1.16.4")
-    compile("com.google.guava:guava:18.0")
+    compile "com.mangofactory:swagger-springmvc:1.0.2"
+    
+    
     
     runtime "org.apache.tomcat.embed:tomcat-embed-jasper"
    
@@ -45,16 +46,16 @@ dependencies {
     //compile 'javax.servlet:jstl:1.2'
     //compile 'javax.servlet.jsp:jsp-api:2.2'
     
-    compile("org.webjars:jquery:2.1.1")
-    compile("org.webjars:bootstrap:3.2.0")
+    compile "org.webjars:jquery:2.1.1"
+    compile "org.webjars:bootstrap:3.2.0"
     compile 'ro.isdc.wro4j:wro4j-core:1.7.0'
-    testCompile("org.springframework.boot:spring-boot-starter-test") 
+    testCompile "org.springframework.boot:spring-boot-starter-test" 
      
-    compile("org.projectlombok:lombok:1.16.4")
-    compile("com.google.guava:guava:18.0")
-    testCompile('junit:junit:4.12')
-    testCompile('org.easytesting:fest-assert:1.4')
-    compile ("com.jayway.awaitility:awaitility:1.6.3") 
+    compile "org.projectlombok:lombok:1.16.4"
+    compile "com.google.guava:guava:18.0"
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.easytesting:fest-assert:1.4'
+    compile  "com.jayway.awaitility:awaitility:1.6.3" 
     testCompile 'org.assertj:assertj-core:3.1.0'
    
 }

@@ -46,7 +46,7 @@ public class HelloRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ApiOperation(value = "find person", httpMethod = "GET")
+    @ApiOperation(value = "find person", httpMethod = "GET",consumes = "application/json,application/xml",produces = "application/json,application/xml")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
             @ApiResponse(code = 404, message = "Request not found") })
@@ -74,7 +74,7 @@ public class HelloRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    @ApiOperation(value = "update person", httpMethod = "PUT")
+    @ApiOperation(value = "update person", httpMethod = "PUT",consumes = "application/json,application/xml", produces = "application/json,application/xml")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Long id, @RequestBody Person person) {
         person.setId(id);
