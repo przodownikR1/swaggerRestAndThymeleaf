@@ -20,8 +20,7 @@ apply plugin: 'io.spring.dependency-management'
 
 repositories {
         jcenter()
-        mavenCentral()
-        
+        mavenCentral()  
     }
     
 jar {
@@ -31,8 +30,6 @@ jar {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-
-
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-web")
@@ -41,8 +38,13 @@ dependencies {
     compile("com.mangofactory:swagger-springmvc:1.0.2")
     compile("org.projectlombok:lombok:1.16.4")
     compile("com.google.guava:guava:18.0")
+    
     compile("org.apache.tomcat.embed:tomcat-embed-jasper")
-   // compile 'javax.servlet:jstl:1.1.1'
+   
+    //compile 'javax.servlet:javax.servlet-api:3.1.0'
+    //compile 'javax.servlet:jstl:1.2'
+    //compile 'javax.servlet.jsp:jsp-api:2.2'
+    
     compile("org.webjars:jquery:2.1.1")
     compile("org.webjars:bootstrap:3.2.0")
     compile 'ro.isdc.wro4j:wro4j-core:1.7.0'
@@ -54,18 +56,14 @@ dependencies {
     testCompile('org.easytesting:fest-assert:1.4')
     compile ("com.jayway.awaitility:awaitility:1.6.3") 
     testCompile 'org.assertj:assertj-core:3.1.0'
-    
-    
+   
 }
-
-
 eclipse {
     classpath {
          containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
          containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
     }
 }
-
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
