@@ -27,6 +27,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiModel;
+import com.wordnik.swagger.annotations.ApiModelProperty;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
@@ -48,8 +50,9 @@ public class HelloRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ApiOperation(value = "find person", httpMethod = "GET", consumes = "application/json,application/xml", produces = "application/json,application/xml")
-    @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid Request"), @ApiResponse(code = 404, message = "Request not found") })
+    @ApiOperation(value = "find person", notes = "find person", httpMethod = "GET", consumes = "application/json,application/xml", produces = "application/json,application/xml")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "SUCCESS", response = Person.class), @ApiResponse(code = 400, message = "Invalid Request"),
+            @ApiResponse(code = 404, message = "Request not found") })
     public ResponseEntity<?> getPerson(@PathVariable Long id) {
         Person person = maps.get(id);
         if (person == null) { return ResponseEntity.notFound().build(); }
@@ -58,7 +61,7 @@ public class HelloRestController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    @ApiOperation(value = "find all person", httpMethod = "GET")
+    @ApiOperation(value = "find all person", notes = "retrieve all users", httpMethod = "GET")
     public ResponseEntity<List<Person>> getPersons() {
         List<Person> result = maps.entrySet().stream().parallel().map(Map.Entry::getValue).collect(Collectors.toList());
         log.info("+++ java8 map.value to list {}", result);
@@ -100,8 +103,12 @@ public class HelloRestController {
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ApiModel(description = "Person object")
 class Person {
+    @ApiModelProperty(notes = "id of the user", required = true, position = 1)
     private Long id;
+    @ApiModelProperty(notes = "login of the user", required = true, position = 2)
     private String login;
+    @ApiModelProperty(notes = "salary of the user", required = false, position = 3)
     private BigDecimal salary;
 }

@@ -38,17 +38,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/META-INF/resources/webjars/").setCachePeriod(31556926);
-
-        registry.addResourceHandler("/favicon.ico").addResourceLocations("/images/favicon.png");
-        registry.addResourceHandler("/favicon2.ico").addResourceLocations("/images/favicon.ico");
-
+        registry.addResourceHandler("/favicon.ico").addResourceLocations("/favicon.ico");
+        registry.addResourceHandler("/favicon.ico").addResourceLocations("/images/favicon.ico");
+        registry.addResourceHandler("/favicon.png").addResourceLocations("/images/favicon.png");
         registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926).resourceChain(true)
                 .addResolver(new GzipResourceResolver());
-
         registry.addResourceHandler("/images/**").addResourceLocations("/images/").setCachePeriod(31556926);
-
         registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926).resourceChain(true).addResolver(new GzipResourceResolver());
-
         registry.addResourceHandler(WEB_JAR_RESOURCE_PATTERNS).addResourceLocations(WEB_JAR_RESOURCE_LOCATION).setCachePeriod(0);
     }
 
@@ -69,8 +65,17 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/api").setViewName("forward:/sdoc.jsp");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        registry.addViewController("//").setViewName("index");
-        registry.addViewController("/info").setViewName("info");
+        addViewsToUrls(registry);
         super.addViewControllers(registry);
+    }
+
+    private void addViewsToUrls(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/info").setViewName("info");
+        registry.addViewController("/welcome").setViewName("welcome");
+        registry.addViewController("/uploadFile").setViewName("uploadFile");
+        registry.addViewController("/logout").setViewName("logout");
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/login2").setViewName("login2");
     }
 }

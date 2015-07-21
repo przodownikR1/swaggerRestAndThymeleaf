@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org" th:lang="${#locale.language}">
+
+
+<head th:include="fragment/headTag :: headTag">
+<title>SpringSecurity-kata</title>
+</head>
+
+
+<body>
+	<div th:include="fragment/nav :: nav" />
+</body>
+<br />
+<div class="container">
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+  This content is only shown to administrators.
+</div>
+<div sec:authorize="hasRole('ROLE_USER')">
+  This content is only shown to users.
+</div>
+<div sec:authorize="hasRole('ROLE_DEV')">
+  This content is only shown to dev.
+</div>
+<br />
+Logged user: <span sec:authentication="name">Bob</span>
+
+<br />
+<br />
+<p th:utext="#{hello}">Hello world !</p>
+
+<br />
+
+<div th:if="${#httpServletRequest.remoteUser != null}">
+    <p th:text="${#httpServletRequest.remoteUser}">
+      sample_user
+    </p>
+</div>
+
+<br />
+ <p>WITH THYMELEAF</p>
+<h4>httpServReqReference:</h4>
+<p th:text="${#httpServletRequest.remoteUser}"></p>
+
+Logged user: <span sec:authentication="name">someUser</span>
+<!-- Roles: <span sec:authentication="principal.authorities">[ROLE_X, ROLE_Y]</span> -->
+
+<div th:with="currentUser=${#httpServletRequest.userPrincipal?.principal}">
+<div th:if="${currentUser!=null}">
+<form th:action="@{/logout}" method="post">
+         <input type="submit" value="Log out" class="btn btn-primary btn-large"/>
+             <input th:name="${_csrf.parameterName}" type="hidden" th:value="${_csrf.token}" /> 
+          
+</form>
+ 
+</div>
+
+</div>
+</div>
+
+
+<div th:include="fragment/footer :: footer" />
+
+</html>

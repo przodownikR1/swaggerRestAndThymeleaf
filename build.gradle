@@ -30,6 +30,10 @@ jar {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+ext{
+ httpClientVersion="4.3.5"   
+}
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile "org.springframework.boot:spring-boot-starter-web"
@@ -49,6 +53,11 @@ dependencies {
     compile "org.webjars:jquery:2.1.1"
     compile "org.webjars:bootstrap:3.2.0"
     compile 'ro.isdc.wro4j:wro4j-core:1.7.0'
+    
+     compile 'org.apache.httpcomponents:httpasyncclient:4.1'
+     compile "org.apache.httpcomponents:httpclient:$httpClientVersion"
+     compile "org.apache.httpcomponents:fluent-hc:$httpClientVersion"
+    
     testCompile "org.springframework.boot:spring-boot-starter-test" 
      
     compile "org.projectlombok:lombok:1.16.4"

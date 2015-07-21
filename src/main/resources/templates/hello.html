@@ -1,8 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Poc hello world</title>
+       <link rel="shortcut icon" type='image/x-icon' th:href="@{/favicon.ico}"></link>
+    
+        <title th:text="${title}">(title)</title>
+        <link th:href="@{/assets/bootstrap/3.2.0/css/bootstrap.css}" rel="stylesheet"></link>
+        <link rel="shortcut icon" th:href="@{/favicon.ico}" href="../../resources/images/favicon.ico" />
+        <script type="text/javascript" th:href="@{/assets/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" th:href="@{/assets/jquery/2.1.1/jquery.js}"></script>
+</head>
+
+
 <body>
     <h1 th:text="${message}">Message</h1>
 
-
+s
 </body>
 </html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head th:include="fragment/headTag :: headTag">
+    <title>Spring Boot as Service for : Rest - Swagger - ThymeLeaf</title>
+    <script type="text/javascript">
+    $(".alert").alert();
+
+    </script>
+   </head>
+
+
+<body>
+     <div th:include="fragment/nav :: nav"/>
+ 
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+  <br/>
+ <br/>
+<div class="container">
+
+    <form th:fragment = "uploaderFragment" action="uploadSuccess.html" th:action="@{/api/uploader}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+         <input th:name="${_csrf.parameterName}" type="hidden" th:value="${_csrf.token}" /> 
+        <input type="submit" />
+    </form>
+
+</div>
+ 
+ 
+ <div th:include="fragment/footer :: footer"/> 
+</body>
+</html>
+

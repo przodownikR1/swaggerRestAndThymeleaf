@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head th:include="fragment/headTag :: headTag">
+    <title>Spring Boot as Service for : Rest - Swagger - ThymeLeaf</title>
+    <script type="text/javascript">
+    $(".alert").alert();
+
+    </script>
+   </head>
+
+<link th:href="@{/assets/css/signin.css}" rel="stylesheet" />
+
+<body>
+    <div class="container">
+        <div class="text-center text-info">
+            <h1>Welcome to Poc</h1>
+        </div>
+        <div class="row">
+        <div id="errorMessage" class="card-panel red lighten-2" th:if="${param.error}">
+                <span class="card-title">Invalid user name or password</span>
+         </div>
+        <form class="form-signin" th:action="@{/login}" method="post">
+            <div th:if="${loginError}" class="alert alert-danger text-center">Wrong Username or Password</div>
+            <div th:if="${logoutSucces}" class="alert alert-warning text-center">Logout Success</div>
+            <h3 class="form-signin-heading">Please Sign In</h3>
+            <input type="text" name="username" class="form-control" placeholder="Username" required="required" autofocus="autofocus"/> 
+            <input type="password" name="password" class="form-control" placeholder="Password" required="required" /> 
+            <label class="checkbox"> 
+                <input type="checkbox" value="remember-me" /> Remember me
+            </label>
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit">Sign In</button>  
+                <button class="btn btn-default" type="reset">Reset</button>     
+            </div>
+             <input th:name="${_csrf.parameterName}" type="hidden" th:value="${_csrf.token}" /> 
+        </form>
+    </div>
+    </div>
+</body>
+</html>
