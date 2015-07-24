@@ -31,7 +31,8 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 ext{
- httpClientVersion="4.3.5"   
+ httpClientVersion="4.3.5" 
+  hawtioVersion = '2.0.0'  
 }
 
 dependencies {
@@ -58,9 +59,22 @@ dependencies {
      compile "org.apache.httpcomponents:httpclient:$httpClientVersion"
      compile "org.apache.httpcomponents:fluent-hc:$httpClientVersion"
     
+    
+     compile "io.hawt:hawtio-core:$hawtioVersion"
+     compile "io.hawt:hawtio-web:$hawtioVersion" //war
+     compile "io.hawt:hawtio-springboot:$hawtioVersion" 
+     compile "io.hawt:hawtio-system:$hawtioVersion"
+     compile "io.hawt:hawtio-plugin-mbean:$hawtioVersion"
+        
+            // JXLS for generating xlsx
+    compile 'org.jxls:jxls:2.1.0'
+
+    // transformation for generating xlsx
+    compile 'org.jxls:jxls-poi:1.0.1'
+    
     testCompile "org.springframework.boot:spring-boot-starter-test" 
      
-    compile "org.projectlombok:lombok:1.16.4"
+    compile "org.projectlombok:lombok:1.16.4" 
     compile "com.google.guava:guava:18.0"
     testCompile 'junit:junit:4.12'
     testCompile 'org.easytesting:fest-assert:1.4'

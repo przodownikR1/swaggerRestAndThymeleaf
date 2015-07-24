@@ -36,7 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/assets/**").antMatchers("/css/**").antMatchers("/js/**").antMatchers("/images/**").antMatchers("/favicon.ico");
+        web.ignoring().antMatchers("/assets/**").antMatchers("/css/**").antMatchers("/app/").antMatchers("/static/hawtio").antMatchers("/js/**")
+                .antMatchers("/images/**").antMatchers("/favicon.ico");
+
     }
 
     @Configuration
@@ -57,7 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests().antMatchers("/welcome", "/info", "/api/ping", "/signup", "/about", "/register").permitAll().antMatchers("/admin")
-                    .access("hasRole('ROLE_ADMIN')").antMatchers("/hello").access("hasRole('ROLE_USER')").anyRequest().authenticated();
+                    .access("hasRole('ROLE_ADMIN')").antMatchers("hawtio").access("hasRole('ROLE_ADMIN')").antMatchers("hawtio/**")
+                    .access("hasRole('ROLE_ADMIN')").antMatchers("hawtio/").access("hasRole('ROLE_ADMIN')").antMatchers("/hello")
+                    .access("hasRole('ROLE_USER')").anyRequest().authenticated();
 
             login(http);
             logout(http);
